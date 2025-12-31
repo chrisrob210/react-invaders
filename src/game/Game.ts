@@ -9,16 +9,26 @@ export class Game {
     screenWidth: number = 800;
     screenHeight: number = 600;
 
+    // player values
+    playerSpeed: number = 0.15;
+    shootCooldown: number = 0;
+    shootDelay: number = 300;
+
+    // points
+    pointsPerEnemy: number = 5;
+    pointsPerUfo: number = 100;
+
+    // wave
+    currentWave: number = 1;
+
+    // enemy values
     totalEnemies: number = 0;
     remainingEnemies: number = 0;
     enemyDirection: 1 | -1 = 1; // 1 = right, -1 = left
     enemySpeed: number = 0.1;
-    baseEnemySpeed: number = 0.1;
+    baseEnemySpeed: number = 0.02;
     maxEnemySpeed: number = 0.5
-    shootCooldown: number = 0;
-    shootDelay: number = 300;
-    pointsPerEnemy: number = 100;
-    currentWave: number = 1;
+
 
     constructor(canvasWidth: number = 800, canvasHeight: number = 600) {
         this.screenWidth = canvasWidth;
@@ -39,7 +49,7 @@ export class Game {
         };
         this.enemyDirection = 1;
         this.enemySpeed = 0.1;
-        this.state.enemies = this.createEnemyGrid(3, 5); // 3 rows, 5 columns
+        this.state.enemies = this.createEnemyGrid(6, 6); // 3 rows, 5 columns
         this.totalEnemies = this.state.enemies.length;
         // generate enemies
         // const rows = 3;
@@ -65,7 +75,7 @@ export class Game {
 
     update(delta: number, input: Input) {
         if (this.state.gameOver) return;
-        const speed = 0.4 * delta;
+        const speed = this.playerSpeed * delta;
 
         // --- player movement ---
         if (input.left) this.state.player.x -= speed;
@@ -221,8 +231,8 @@ export class Game {
 
     createEnemyGrid(rows: number, cols: number) {
         const enemies: Enemy[] = [];
-        const spacingX = 80;
-        const spacingY = 60;
+        const spacingX = 60;
+        const spacingY = 50;
         const startX = 100;
         const startY = 50;
 
@@ -232,7 +242,7 @@ export class Game {
                     color: "green",
                     x: startX + col * spacingX,
                     y: startY + row * spacingY,
-                    width: 60,
+                    width: 30,
                     height: 30,
                 });
             }
@@ -257,7 +267,7 @@ export class Game {
         this.state.enemies = this.createEnemyGrid(newRows, cols);
 
         // optionally increase base speed
-        this.baseEnemySpeed += 0.02;
+        this.baseEnemySpeed += 0.005;
         this.maxEnemySpeed += 0.05;
 
         console.log("Wave", this.currentWave);

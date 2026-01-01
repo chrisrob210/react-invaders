@@ -1,7 +1,7 @@
 import type { Enemy, GameState } from "./GameState";
 // import type { Rect } from "./collision";
 import { Input } from "./Input";
-import { rectsIntersect } from "./collision";
+import { hasCollided } from "./collision";
 
 export class Game {
     state: GameState;
@@ -103,7 +103,7 @@ export class Game {
 
         // player - enemy collision
         this.state.enemies.forEach((enemy) => {
-            if (rectsIntersect(this.state.player, enemy)) {
+            if (hasCollided(this.state.player, enemy)) {
                 this.state.lives -= 1;         // lose a life
                 console.log("PLAYER HIT! Lives:", this.state.lives);
 
@@ -148,12 +148,12 @@ export class Game {
         // --- collision with enemies ---
         this.state.enemies = this.state.enemies.filter((enemy) => {
             const hit = this.state.bullets.some((bullet) =>
-                rectsIntersect(bullet, enemy)
+                hasCollided(bullet, enemy)
             );
             if (hit) {
                 // remove bullets that hit this enemy
                 this.state.bullets = this.state.bullets.filter(
-                    (bullet) => !rectsIntersect(bullet, enemy)
+                    (bullet) => !hasCollided(bullet, enemy)
                 );
                 this.state.score += this.pointsPerEnemy;
             }

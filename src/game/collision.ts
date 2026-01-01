@@ -5,7 +5,7 @@ export interface Rect {
     height: number;
 }
 
-export function rectsIntersect(a: Rect, b: Rect): boolean {
+export function hasCollided(a: Rect, b: Rect): boolean {
     return (
         a.x < b.x + b.width &&
         a.x + a.width > b.x &&

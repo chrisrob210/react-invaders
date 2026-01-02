@@ -12,6 +12,7 @@ export class EnemyManager {
     }
 
     update(delta: number, input: Input) {
+        input;
         let shouldReverse = false;
         this.enemies.forEach((enemy: Enemy) => {
             // check for edge collision

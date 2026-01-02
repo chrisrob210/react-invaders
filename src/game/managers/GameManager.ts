@@ -1,13 +1,20 @@
-import type { Enemy, GameState } from "./GameState";
+import type { EnemyState, GameState } from "../GameState";
 // import type { Rect } from "./collision";
-import { Input } from "./Input";
-import { hasCollided } from "./collision";
+import { Input } from "../Input";
+import { hasCollided } from "../collision";
+import type { GameObject } from "../objects/GameObject";
+import { Player } from "../objects/Player";
+import { Enemy } from "../objects/Enemy";
 
-export class Game {
+export class GameManager {
     state: GameState;
 
-    screenWidth: number = 800;
-    screenHeight: number = 600;
+    static screenWidth: number = 800;
+    static screenHeight: number = 600;
+
+    gameObjects: GameObject[] = [];
+    gameOver: boolean = false;
+    pause: boolean = false;
 
     // player values
     playerSpeed: number = 0.15;
@@ -31,8 +38,8 @@ export class Game {
 
 
     constructor(canvasWidth: number = 800, canvasHeight: number = 600) {
-        this.screenWidth = canvasWidth;
-        this.screenHeight = canvasHeight;
+        GameManager.screenWidth = canvasWidth;
+        GameManager.screenHeight = canvasHeight;
 
         this.state = {
             player: {
@@ -51,6 +58,8 @@ export class Game {
         this.enemySpeed = 0.1;
         this.state.enemies = this.createEnemyGrid(6, 6); // 3 rows, 5 columns
         this.totalEnemies = this.state.enemies.length;
+
+        this.gameObjects.push(new Player());
         // generate enemies
         // const rows = 3;
         // const cols = 5;
@@ -75,21 +84,32 @@ export class Game {
 
     update(delta: number, input: Input) {
         if (this.state.gameOver) return;
-        const speed = this.playerSpeed * delta;
 
+        if (input.pause === true) {
+            this.pause = !this.pause;
+            input.pause = false;
+        }
+
+        if (this.pause === true) return;
+
+        // const speed = this.playerSpeed * delta;
+        this.gameObjects.forEach((gameObject) => {
+            gameObject.update(delta, input);
+        })
         // --- player movement ---
-        if (input.left) this.state.player.x -= speed;
-        if (input.right) this.state.player.x += speed;
-        this.state.player.x = Math.max(0, Math.min(this.screenWidth - this.state.player.width, this.state.player.x));
+        // if (input.left) this.state.player.x -= speed;
+        // if (input.right) this.state.player.x += speed;
+        // this.state.player.x = Math.max(0, Math.min(GameManager.screenWidth - this.state.player.width, this.state.player.x));
+
 
         // --- enemy movement ---
         let shouldReverse = false;
 
-        this.state.enemies.forEach((enemy: Enemy) => {
+        this.state.enemies.forEach((enemy: EnemyState) => {
             enemy.x += this.enemyDirection * this.enemySpeed * delta;
 
             // check for edge collision
-            if (enemy.x <= 0 || enemy.x + enemy.width >= this.screenWidth) {
+            if (enemy.x <= 0 || enemy.x + enemy.width >= GameManager.screenWidth) {
                 shouldReverse = true;
             }
         });
@@ -176,13 +196,16 @@ export class Game {
     draw(ctx: CanvasRenderingContext2D) {
 
         // player
-        ctx.fillStyle = "white";
-        ctx.fillRect(
-            this.state.player.x,
-            this.state.player.y,
-            this.state.player.width,
-            this.state.player.height
-        );
+        // ctx.fillStyle = "white";
+        // ctx.fillRect(
+        //     this.state.player.x,
+        //     this.state.player.y,
+        //     this.state.player.width,
+        //     this.state.player.height
+        // );
+        this.gameObjects.forEach((gameObject) => {
+            gameObject.draw(ctx);
+        })
 
         // enemies
         this.state.enemies.forEach((enemy) => {
@@ -230,7 +253,7 @@ export class Game {
 
 
     createEnemyGrid(rows: number, cols: number) {
-        const enemies: Enemy[] = [];
+        const enemies: EnemyState[] = [];
         const spacingX = 60;
         const spacingY = 50;
         const startX = 100;

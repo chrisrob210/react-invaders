@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Game } from "./game/Game";
+import { GameManager } from "./game/managers/GameManager";
 import { Input } from "./game/Input";
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
     let lastTime = 0;
     //let x = 100;
 
-    const game = new Game(canvas.width, canvas.height)
+    const gameManager = new GameManager(canvas.width, canvas.height)
     const input = new Input()
 
     const handleKeyDown = (e: KeyboardEvent) => input.onKeyDown(e);
@@ -44,8 +44,8 @@ function App() {
       //   x = -50;
       // }
 
-      game.update(delta, input);
-      game.draw(ctx);
+      gameManager.update(delta, input);
+      gameManager.draw(ctx);
 
       // Draw
       // ctx.fillStyle = "white";

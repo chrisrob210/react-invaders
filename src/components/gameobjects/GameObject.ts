@@ -1,4 +1,4 @@
-import { Input } from "../Input";
+import { KeyboardInput } from "../../controls/KeyboardInput";
 
 export abstract class GameObject {
     x: number = 0;
@@ -57,7 +57,7 @@ export abstract class GameObject {
 
 
 
-    abstract update(delta: number, input?: Input): void;
+    abstract update(delta: number, input?: KeyboardInput): void;
 
     abstract draw(ctx: CanvasRenderingContext2D): void;
 }

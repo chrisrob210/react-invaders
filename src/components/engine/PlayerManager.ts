@@ -1,8 +1,8 @@
 import { Player } from "../gameobjects/Player";
 import { Enemy } from "../gameobjects/Enemy";
-import { Input } from "../Input";
+import { KeyboardInput } from "../../controls/KeyboardInput";
 import { Bullet } from "../gameobjects/Bullet";
-import { isCollision } from "../collision";
+import { isCollision } from "../logic/collision";
 import { GameManager } from "./GameManager";
 
 
@@ -15,7 +15,7 @@ export class PlayerManager {
         this.bullets = [];
     }
 
-    update(delta: number, input: Input, enemies: Enemy[]) {
+    update(delta: number, input: KeyboardInput, enemies: Enemy[]) {
         if (input.shoot) {
             const bullet = new Bullet();
             bullet.setLocation(this.player.getX(), this.player.getY(), this.player.getWidth())

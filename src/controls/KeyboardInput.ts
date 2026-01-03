@@ -1,4 +1,4 @@
-export class Input {
+export class KeyboardInput {
     left = false;
     right = false;
     up = false;

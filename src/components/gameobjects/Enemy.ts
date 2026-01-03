@@ -1,6 +1,6 @@
-import { GameManager } from "../managers/GameManager";
+import { GameManager } from "../engine/GameManager";
 import { GameObject } from "./GameObject";
-import { Input } from "../Input";
+import { KeyboardInput } from "../../controls/KeyboardInput";
 
 export class Enemy extends GameObject {
     x = 0;
@@ -18,7 +18,7 @@ export class Enemy extends GameObject {
         this.speed = speed;
     }
 
-    update(delta: number, input: Input) {
+    update(delta: number, input: KeyboardInput) {
         // let shouldReverse = false;
 
         this.x += this.speed * delta;

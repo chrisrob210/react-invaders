@@ -1,5 +1,5 @@
 import { GameObject } from "./GameObject";
-import { Input } from "../Input";
+import { KeyboardInput } from "../../controls/KeyboardInput";
 
 export class Label extends GameObject {
     font: string = "";
@@ -29,7 +29,7 @@ export class Label extends GameObject {
         this.text = text;
     }
 
-    update(delta: number, input: Input) {
+    update(delta: number, input: KeyboardInput) {
         delta;
         input;
     }

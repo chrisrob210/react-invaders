@@ -1,11 +1,13 @@
 import { PlayerManager } from "./PlayerManager";
 import { EnemyManager } from "./EnemyManager";
-import { Input } from "../Input";
+import { KeyboardInput } from "../../controls/KeyboardInput";
 import { GameObject } from "../gameobjects/GameObject";
 import { Label } from "../gameobjects/Label";
 
 export class GameManager {
     // state: GameState;
+
+    // TODO: Nothing should be in this file except the basics required to function
 
     static screenWidth: number = 800;
     static screenHeight: number = 600;
@@ -83,35 +85,9 @@ export class GameManager {
         this.labelCurrentWave.setColor("white");
         this.labelGameOver = new Label("50px Arial", "GAME OVER", 700, 20);
         this.labelGameOver.setColor("red");
-
-        // test
-        // this.gameObjects.push(new Player());
-        // TODO: move this to EnemyManager
-        // this.gameObjects.push(new Enemy());
-
-        // generate enemies
-        // const rows = 3;
-        // const cols = 5;
-        // const spacingX = 80;
-        // const spacingY = 60;
-        // const startX = 100;
-        // const startY = 50;
-
-        // for (let row = 0; row < rows; row++) {
-        //     for (let col = 0; col < cols; col++) {
-        //         this.state.enemies.push({
-        //             color: "green",
-        //             x: startX + col * spacingX,
-        //             y: startY + row * spacingY,
-        //             width: 60,
-        //             height: 30,
-        //         });
-        //     }
-        // }
-
     }
 
-    update(delta: number, input: Input) {
+    update(delta: number, input: KeyboardInput) {
         if (GameManager.gameOver) return;
 
         if (input.pause === true) {

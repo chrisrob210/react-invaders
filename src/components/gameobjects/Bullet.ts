@@ -1,5 +1,5 @@
 import { GameObject } from "./GameObject";
-import { Input } from "../Input";
+import { KeyboardInput } from "../../controls/KeyboardInput";
 
 export class Bullet extends GameObject {
     x = 0;
@@ -16,7 +16,7 @@ export class Bullet extends GameObject {
         this.y = playerY;
     }
 
-    update(delta: number, input: Input): void {
+    update(delta: number, input: KeyboardInput): void {
         if (this.coolDown > 0) this.coolDown -= delta;
         if (input.shoot && this.coolDown <= 0) {
             // this.state.bullets.push({

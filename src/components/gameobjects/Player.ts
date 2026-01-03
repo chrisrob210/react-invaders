@@ -1,6 +1,6 @@
 import { GameObject } from "./GameObject";
-import { Input } from "../Input";
-import { GameManager } from "../managers/GameManager";
+import { KeyboardInput } from "../../controls/KeyboardInput";
+import { GameManager } from "../engine/GameManager";
 
 export class Player extends GameObject {
     x = 375;
@@ -10,7 +10,7 @@ export class Player extends GameObject {
     color: string = "white";
     speed: number = 0.15;
 
-    update(delta: number, input: Input) {
+    update(delta: number, input: KeyboardInput) {
         const speedDelta = this.speed * delta;
         if (input.left) this.x -= speedDelta;
         if (input.right) this.x += speedDelta;

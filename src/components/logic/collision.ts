@@ -1,4 +1,4 @@
-import { GameObject } from "./gameobjects/GameObject";
+import { GameObject } from "../gameobjects/GameObject";
 
 export interface Rect {
     x: number;

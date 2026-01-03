@@ -1,5 +1,5 @@
 import { GameManager } from "./GameManager";
-import { Input } from "../Input";
+import { KeyboardInput } from "../../controls/KeyboardInput";
 import { Enemy } from "../gameobjects/Enemy";
 
 export class EnemyManager {
@@ -11,7 +11,7 @@ export class EnemyManager {
         this.enemies = [];
     }
 
-    update(delta: number, input: Input) {
+    update(delta: number, input: KeyboardInput) {
         input;
         let shouldReverse = false;
         this.enemies.forEach((enemy: Enemy) => {

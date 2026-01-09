@@ -1,16 +1,17 @@
-import { GameObject } from "./GameObject";
+import { GameObject } from "../gameobjects/GameObject";
 import { KeyboardInput } from "../../controls/KeyboardInput";
 
 export class Label extends GameObject {
     font: string = "";
     text: string = "";
 
-    constructor(font?: string, text?: string, positionX?: number, positionY?: number) {
+    constructor(font?: string, text?: string, positionX?: number, positionY?: number, color?: string) {
         super();
         if (font) this.font = font;
         if (text) this.text = text;
         if (positionX) this.x = positionX;
         if (positionY) this.y = positionY;
+        if (color) this.color = color;
     }
 
     getFont() {

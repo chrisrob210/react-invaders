@@ -1,8 +1,9 @@
 import { PlayerManager } from "./PlayerManager";
 import { EnemyManager } from "./EnemyManager";
+import { UIManager } from "./UIManager";
 import { KeyboardInput } from "../../controls/KeyboardInput";
 import { GameObject } from "../gameobjects/GameObject";
-import { Label } from "../ui/Label";
+// import { Label } from "../ui/Label";
 
 export class GameManager {
     // state: GameState;
@@ -15,6 +16,7 @@ export class GameManager {
     gameObjects: GameObject[] = [];
     playerManager: PlayerManager;
     enemyManager: EnemyManager;
+    uiManager: UIManager;
 
     // player values
     playerSpeed: number = 0.15;
@@ -30,10 +32,10 @@ export class GameManager {
     static pointsPerEnemy: number = 5;
     static pointsPerUfo: number = 100;
 
-    labelLives: Label;
-    labelScore: Label;
-    labelCurrentWave: Label;
-    labelGameOver: Label;
+    // labelLives: Label;
+    // labelScore: Label;
+    // labelCurrentWave: Label;
+    // labelGameOver: Label;
 
     // enemy values
     totalEnemies: number = 0;
@@ -54,12 +56,13 @@ export class GameManager {
         this.playerManager = new PlayerManager();
         this.enemyManager = new EnemyManager();
         this.enemyManager.createEnemyGrid();
+        this.uiManager = new UIManager();
 
         // Labels (test)
-        this.labelLives = new Label("20px Arial", "Lives: ", 700, 20, "white");
-        this.labelScore = new Label("20px Arial", "Score: ", 10, 20, "white");
-        this.labelCurrentWave = new Label("20px Arial", "Wave: ", 350, 20, "white");
-        this.labelGameOver = new Label("50px Arial", "GAME OVER", 700, 20, "red");
+        // this.labelLives = new Label("20px Arial", "Lives: ", 700, 20, "white");
+        // this.labelScore = new Label("20px Arial", "Score: ", 10, 20, "white");
+        // this.labelCurrentWave = new Label("20px Arial", "Wave: ", 350, 20, "white");
+        // this.labelGameOver = new Label("50px Arial", "GAME OVER", 700, 20, "red");
     }
 
     update(delta: number, input: KeyboardInput) {
@@ -75,9 +78,10 @@ export class GameManager {
         // Update GameObjects
         this.playerManager.update(delta, input, this.enemyManager.enemies);
         this.enemyManager.update(delta, input);
-        this.labelLives.setText("Lives: " + GameManager.lives);
-        this.labelScore.setText("Score: " + GameManager.score);
-        this.labelCurrentWave.setText("Wave: " + GameManager.currentWave);
+        this.uiManager.update(delta, input);
+        //     this.labelLives.setText("Lives: " + GameManager.lives);
+        //     this.labelScore.setText("Score: " + GameManager.score);
+        //     this.labelCurrentWave.setText("Wave: " + GameManager.currentWave);
     }
 
     draw(ctx: CanvasRenderingContext2D) {
@@ -88,14 +92,14 @@ export class GameManager {
         // Draw GameObjects
         this.playerManager.draw(ctx);
         this.enemyManager.draw(ctx);
-
+        this.uiManager.draw(ctx);
         // Labels
-        this.labelLives.draw(ctx);
-        this.labelScore.draw(ctx);
-        this.labelCurrentWave.draw(ctx);
-        if (GameManager.gameOver) {
-            this.labelGameOver.draw(ctx);
-        }
+        // this.labelLives.draw(ctx);
+        // this.labelScore.draw(ctx);
+        // this.labelCurrentWave.draw(ctx);
+        // if (GameManager.gameOver) {
+        //     this.labelGameOver.draw(ctx);
+        // }
 
         // bullets
         // ctx.fillStyle = "yellow";

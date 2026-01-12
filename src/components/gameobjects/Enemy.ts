@@ -19,6 +19,7 @@ export class Enemy extends GameObject {
     }
 
     update(delta: number, input: KeyboardInput) {
+        input;
         // let shouldReverse = false;
 
         this.x += this.speed * delta;

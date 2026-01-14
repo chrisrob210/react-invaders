@@ -11,7 +11,9 @@ export class PlayerManager {
     bullets: Bullet[];
 
     constructor() {
-        this.player = new Player();
+        const image = new Image();
+        image.src = "/src/assets/space_squid.png"
+        this.player = new Player(image);
         this.bullets = [];
     }
 

@@ -11,11 +11,19 @@ export class Bullet extends GameObject {
     coolDown: number = 0;
     delay: number = 300;
     image: HTMLImageElement;
-    imgSrc: string = "/src/assets/bullet.png";
+    imageSrc: string = "/src/assets/bullet.png";
     constructor() {
         super();
         this.image = new Image();
-        this.image.src = this.imgSrc;
+        this.image.src = this.imageSrc;
+    }
+
+    setImage(image: HTMLImageElement) {
+        this.image = image;
+    }
+
+    setImageSrc(imageSrc: string) {
+        this.image.src = imageSrc;
     }
 
     setLocation(playerX: number, playerY: number, playerWidth: number): void {

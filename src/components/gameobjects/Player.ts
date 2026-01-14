@@ -10,14 +10,20 @@ export class Player extends GameObject {
     color: string = "white";
     speed: number = 0.15;
     image: HTMLImageElement;
+    imageSrc: string = "/src/assets/space_squid.png";
 
-    constructor(image: HTMLImageElement) {
+    constructor() {
         super()
-        this.image = image;
+        this.image = new Image();
+        this.image.src = this.imageSrc;
     }
 
     setImage(image: HTMLImageElement) {
         this.image = image;
+    }
+
+    setImageSrc(imageSrc: string) {
+        this.image.src = imageSrc;
     }
 
     update(delta: number, input: KeyboardInput) {

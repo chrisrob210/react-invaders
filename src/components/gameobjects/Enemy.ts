@@ -29,6 +29,14 @@ export class Enemy extends GameObject {
         this.speed = speed;
     }
 
+    setImage(image: HTMLImageElement) {
+        this.image = image;
+    }
+
+    setImageSrc(imageSrc: string) {
+        this.image.src = imageSrc;
+    }
+
     update(delta: number, input: KeyboardInput) {
         input;
         // let shouldReverse = false;

@@ -5,10 +5,20 @@ import { GameManager } from "../engine/GameManager";
 export class Player extends GameObject {
     x = 375;
     y = 520;
-    width = 50;
-    height = 20;
+    width = 32;
+    height = 32;
     color: string = "white";
     speed: number = 0.15;
+    image: HTMLImageElement;
+
+    constructor(image: HTMLImageElement) {
+        super()
+        this.image = image;
+    }
+
+    setImage(image: HTMLImageElement) {
+        this.image = image;
+    }
 
     update(delta: number, input: KeyboardInput) {
         const speedDelta = this.speed * delta;
@@ -21,12 +31,13 @@ export class Player extends GameObject {
     }
 
     draw(ctx: CanvasRenderingContext2D) {
-        ctx.fillStyle = "white";
-        ctx.fillRect(
-            this.x,
-            this.y,
-            this.width,
-            this.height
-        );
+        // ctx.fillStyle = "white";
+        // ctx.fillRect(
+        //     this.x,
+        //     this.y,
+        //     this.width,
+        //     this.height
+        // );
+        ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
 }

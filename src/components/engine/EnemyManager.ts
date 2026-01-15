@@ -6,9 +6,17 @@ export class EnemyManager {
     direction: 1 | -1 = 1;
     enemies: Enemy[];
     private gridCreated: boolean = false;
-
+    imageSources = [
+        '/src/assets/space_crab.png',
+        '/src/assets/space_squid.png'
+    ];
     constructor() {
         this.enemies = [];
+    }
+
+    // Random number generator that returns 0 or 1
+    private getRandomImageIndex(): 0 | 1 {
+        return Math.floor(Math.random() * 2) as 0 | 1;
     }
 
     update(delta: number, input: KeyboardInput) {
@@ -53,13 +61,13 @@ export class EnemyManager {
 
         for (let row = 0; row < rows; row++) {
             for (let col = 0; col < cols; col++) {
-                // enemies.push({
-                //     color: "green",
-                //     x: startX + col * spacingX,
-                //     y: startY + row * spacingY,
-                //     width: 30,
-                //     height: 30,
-                // });
+                // Generate random 0 or 1 to select image source
+                const randomIndex = this.getRandomImageIndex();
+                const imageSource = this.imageSources[randomIndex];
+
+                // Create new Image() for each enemy
+                const image = new Image();
+                image.src = imageSource;
 
 
                 const enemy = new Enemy(startX + col * spacingX, startY + row * spacingY, image);

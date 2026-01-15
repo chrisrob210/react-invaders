@@ -5,12 +5,12 @@ import { GameManager } from "../engine/GameManager";
 export class Player extends GameObject {
     x = 375;
     y = 520;
-    width = 32;
-    height = 32;
+    width = 64;
+    height = 64;
     color: string = "white";
     speed: number = 0.15;
     image: HTMLImageElement;
-    imageSrc: string = "/src/assets/space_squid.png";
+    imageSrc: string = "/src/assets/player.png";
 
     constructor() {
         super()

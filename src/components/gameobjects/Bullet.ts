@@ -41,13 +41,6 @@ export class Bullet extends GameObject {
     }
 
     draw(ctx: CanvasRenderingContext2D): void {
-        // ctx.fillStyle = this.color;
-        // ctx.fillRect(
-        //     this.x,
-        //     this.y,
-        //     this.width,
-        //     this.height
-        // );
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
 

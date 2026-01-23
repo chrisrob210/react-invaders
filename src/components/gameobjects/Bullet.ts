@@ -34,13 +34,6 @@ export class Bullet extends GameObject {
     update(delta: number, input: KeyboardInput): void {
         if (this.coolDown > 0) this.coolDown -= delta;
         if (input.shoot && this.coolDown <= 0) {
-            // this.state.bullets.push({
-            //     x: this.state.player.x + this.state.player.width / 2 - 2.5, // center
-            //     y: this.state.player.y,
-            //     width: 5,
-            //     height: 10,
-            //     speed: 0.5, // pixels per ms
-            // });
             this.coolDown = this.delay; // reset cooldown
             input.shoot = false; // one shot per keypress
         }

@@ -2,7 +2,7 @@ import { GameManager } from "./GameManager";
 import { KeyboardInput } from "../../controls/KeyboardInput";
 import { Enemy } from "../gameobjects/Enemy";
 
-export class EnemyManager {
+export class EnemyController {
     direction: 1 | -1 = 1;
     enemies: Enemy[];
     private gridCreated: boolean = false;
